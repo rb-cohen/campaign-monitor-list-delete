@@ -1,0 +1,14 @@
+{
+    "name": "rb-cohen/campaign-monitor-list-delete",
+    "description": "Delete old subscriber lists that have no references",
+    "type": "project",
+    "require": {
+        "campaignmonitor/createsend-php": "^5.0"
+    },
+    "authors": [
+        {
+            "name": "Arron Wooods",
+            "email": "me@arronwoods.com"
+        }
+    ]
+}
