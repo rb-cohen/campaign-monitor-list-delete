@@ -20,6 +20,14 @@ $draftCampaignResult = $clientAPI->get_drafts();
 $scheduledCampaignResult = $clientAPI->get_scheduled();
 $sentCampaignResult = $clientAPI->get_campaigns();
 
+// filter out drafts made more than 6 months ago
+$draftCampaignResult->response = array_filter($draftCampaignResult->response, function($draft) use ($now) {
+    $sent = \DateTime::createFromFormat('Y-m-d H:i:s', $draft->DateCreated);
+    $dateDiff = $now->diff($sent);
+
+    return ($dateDiff->y === 0 && $dateDiff->m < 6);
+});
+
 // filter out campaigns sent more than 3 months ago
 $sentCampaignResult->response = array_filter($sentCampaignResult->response, function($campaign) use ($now) {
     $sent = \DateTime::createFromFormat('Y-m-d H:i:s', $campaign->SentDate);
